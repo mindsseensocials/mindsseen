@@ -1,0 +1,95 @@
+.platform-stage {
+  clip-path: inset(50%);
+}
+
+.story-panel[data-phase="enter"] .platform-stage {
+  animation: hero-mask-reveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.story-panel[data-phase="exit"] .platform-stage {
+  animation: hero-mask-exit 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.platform-bg,
+.platform-noblur {
+  will-change: transform;
+}
+
+.platform-noblur-clip {
+  --reveal-x: -200px;
+  --reveal-y: -200px;
+  --reveal-size: 0px;
+  -webkit-mask-image: radial-gradient(
+    circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),
+    #000 0%,
+    #000 46%,
+    transparent 74%
+  );
+  mask-image: radial-gradient(
+    circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),
+    #000 0%,
+    #000 46%,
+    transparent 74%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.circle-reveal {
+  opacity: 0;
+  filter: blur(16px);
+}
+
+.story-panel[data-phase="enter"] .circle-reveal {
+  animation: circle-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.story-panel[data-phase="exit"] .circle-reveal {
+  animation: circle-out 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.story-panel[data-phase="hidden"] .circle-reveal {
+  opacity: 0;
+  filter: blur(16px);
+}
+
+@keyframes circle-in {
+  from {
+    opacity: 0;
+    filter: blur(16px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes circle-out {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-stage,
+  .circle-reveal {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    clip-path: inset(0%);
+  }
+
+  .platform-bg,
+  .platform-noblur {
+    transform: none !important;
+  }
+}

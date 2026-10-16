@@ -1,0 +1,127 @@
+.card-up,
+.card-down {
+  opacity: 0;
+}
+
+.story-panel[data-phase="enter"] .card-up {
+  animation: card-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.story-panel[data-phase="enter"] .card-down {
+  animation: card-down 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.story-panel[data-phase="exit"] .card-up {
+  animation: card-up-exit 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.story-panel[data-phase="exit"] .card-down {
+  animation: card-down-exit 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.story-panel[data-phase="hidden"] .card-up {
+  opacity: 0;
+  transform: translateY(56px);
+}
+
+.story-panel[data-phase="hidden"] .card-down {
+  opacity: 0;
+  transform: translateY(-56px);
+}
+
+@keyframes card-up {
+  from {
+    opacity: 0;
+    transform: translateY(56px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-down {
+  from {
+    opacity: 0;
+    transform: translateY(-56px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-up-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(56px);
+  }
+}
+
+@keyframes card-down-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-56px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .experience-photo img {
+    filter: blur(10px);
+    transform: scale(1.06);
+    transition:
+      filter 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .experience-card:hover .experience-photo img {
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.experience-underline {
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: currentColor;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.experience-card:hover .experience-underline {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-up,
+  .card-down {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .experience-photo img {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .experience-underline {
+    transform: none;
+    transition: none;
+  }
+}

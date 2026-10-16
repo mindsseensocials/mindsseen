@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f3ed;
+  --foreground: #171717;
+}
+
+html {
+  background: #f6f3ed;
+  overflow: hidden;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-supply-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.story-panel {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.story-panel[data-phase="enter"],
+.story-panel[data-phase="exit"] {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@keyframes hero-mask-reveal {
+  from {
+    clip-path: inset(50%);
+  }
+  to {
+    clip-path: inset(0%);
+  }
+}
+
+@keyframes hero-mask-exit {
+  from {
+    clip-path: inset(0%);
+  }
+  to {
+    clip-path: inset(50%);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-up-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+}
+
+@keyframes reveal-down {
+  from {
+    opacity: 0;
+    transform: translateY(-110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-down-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-110%);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.hero-mask {
+  clip-path: inset(50%);
+}
+
+.story-panel[data-phase="enter"] .hero-mask {
+  animation: hero-mask-reveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.story-panel[data-phase="exit"] .hero-mask {
+  animation: hero-mask-exit 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.word-reveal {
+  display: inline-block;
+  opacity: 0;
+}
+
+.story-panel[data-phase="enter"] .word-up {
+  animation: reveal-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.story-panel[data-phase="exit"] .word-up {
+  animation: reveal-up-exit 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.story-panel[data-phase="hidden"] .word-up {
+  opacity: 0;
+  transform: translateY(110%);
+}
+
+.story-panel[data-phase="enter"] .word-down {
+  animation: reveal-down 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.story-panel[data-phase="exit"] .word-down {
+  animation: reveal-down-exit 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.story-panel[data-phase="hidden"] .word-down {
+  opacity: 0;
+  transform: translateY(-110%);
+}
+
+.eyebrow-reveal {
+  display: inline-block;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.story-panel[data-phase="enter"] .eyebrow-reveal {
+  animation: reveal-down 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.story-panel[data-phase="exit"] .eyebrow-reveal {
+  animation: reveal-down-exit 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.story-panel[data-phase="hidden"] .eyebrow-reveal {
+  opacity: 0;
+  transform: translateY(-110%);
+}
+
+.animate-fade-up {
+  opacity: 0;
+}
+
+.story-panel[data-phase="enter"] .animate-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.story-panel[data-phase="exit"] .animate-fade-up {
+  animation: fade-up-exit 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+.whim-mask {
+  -webkit-mask-image: url("/images/WHIM-vector.svg");
+  mask-image: url("/images/WHIM-vector.svg");
+  -webkit-mask-source-type: alpha;
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.story-panel[data-phase="enter"] .whim-mask {
+  animation: fade-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.story-panel[data-phase="exit"] .whim-mask {
+  animation: fade-up-exit 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: 0s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mask,
+  .word-reveal,
+  .eyebrow-reveal,
+  .animate-fade-up,
+  .whim-mask {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0%);
+  }
+}
