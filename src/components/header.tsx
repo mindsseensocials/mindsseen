@@ -7,9 +7,9 @@ import { Cta } from "@/components/cta";
 import { useStory } from "@/components/story";
 
 const navItems = [
-  { id: "why-it-matters", label: "Why it matters", index: 1 },
-  { id: "the-platform", label: "The Platform", index: 2 },
-  { id: "four-experiences", label: "Four Experiences", index: 3 },
+  { id: "why-it-matters", label: "What is neuroinclusion?", index: 1 },
+  { id: "the-platform", label: "Neuroinclusive space", index: 2 },
+  { id: "four-experiences", label: "Learn", index: 3 },
   { id: "whats-next", label: "What's Next", index: 4 },
   { id: "join-us", label: "Join us", index: 5 },
 ] as const;
@@ -111,25 +111,40 @@ export function Header() {
             onLight ? "text-neutral-900" : "text-white/90"
           }`}
         >
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              href={`#${item.id}`}
-              className={`transition-opacity hover:opacity-70 ${
-                index === item.index ? "opacity-100" : "opacity-70"
-              }`}
-              onClick={(event) => {
-                event.preventDefault();
-                go(item.index);
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = index === item.index;
+
+            return (
+              <Link
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={active ? "page" : undefined}
+                className={`relative pb-1 transition-opacity hover:opacity-70 ${
+                  active ? "opacity-100" : "opacity-70"
+                }`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  go(item.index);
+                }}
+              >
+                {item.label}
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-x-0 bottom-0 h-px origin-left bg-current transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    active ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center justify-self-end gap-3">
-          <Cta href="/waitlist" tone={onLight ? "on-light" : "on-dark"}>
+          <Cta
+            href="#join-us"
+            tone={onLight ? "on-light" : "on-dark"}
+            onClick={() => setOpen(false)}
+          >
             <span className="md:hidden">Join Now</span>
             <span className="hidden md:inline">Join the Waitlist</span>
           </Cta>
@@ -175,29 +190,41 @@ export function Header() {
         </Link>
 
         <nav className="flex flex-1 flex-col justify-center gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              href={`#${item.id}`}
-              tabIndex={open ? 0 : -1}
-              className={`font-heading text-[clamp(1.85rem,8vw,2.6rem)] leading-none tracking-[-0.03em] font-extralight text-neutral-950 ${
-                index === item.index ? "opacity-100" : "opacity-45"
-              }`}
-              onClick={(event) => {
-                event.preventDefault();
-                go(item.index);
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = index === item.index;
+
+            return (
+              <Link
+                key={item.id}
+                href={`#${item.id}`}
+                tabIndex={open ? 0 : -1}
+                aria-current={active ? "page" : undefined}
+                className={`relative w-fit font-heading text-[clamp(1.85rem,8vw,2.6rem)] leading-none tracking-[-0.03em] font-extralight text-neutral-950 ${
+                  active ? "opacity-100" : "opacity-45"
+                }`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  go(item.index);
+                }}
+              >
+                {item.label}
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-x-0 -bottom-1 h-px origin-left bg-current transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    active ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         <Cta
-          href="/waitlist"
+          href="#join-us"
           size="lg"
           tone="on-light"
           className="w-full"
+          onClick={() => setOpen(false)}
         >
           Join the Waitlist
         </Cta>

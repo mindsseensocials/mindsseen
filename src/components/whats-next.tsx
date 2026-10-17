@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Cta } from "@/components/cta";
 import { PaintRule } from "@/components/paint-rule";
 import { WordReveal } from "@/components/word-reveal";
 import { useSectionPhase } from "@/components/story";
@@ -39,15 +40,12 @@ export function WhatsNext() {
             WHAT&apos;S NEXT
           </p>
 
-          <h2 className="mt-3 max-w-[16ch] text-[clamp(2.1rem,4.4vw,3.7rem)] leading-[1.05] tracking-[-0.03em] md:mt-4">
+          <h2 className="mt-3 max-w-[18ch] text-[clamp(2.1rem,4.4vw,3.7rem)] leading-[1.05] tracking-[-0.03em] md:mt-4">
             <span className="block font-heading font-extralight">
-              <WordReveal text="A growing space" delay={0.35} />
+              <WordReveal text="A growing space for" delay={0.35} />
             </span>
-            <span className="mt-1 block font-heading font-extralight">
-              <WordReveal text="for curious" delay={0.59} />
-            </span>
-            <span className="mt-1 block font-heading font-extralight">
-              <WordReveal text="minds." delay={0.75} />
+            <span className="mt-1 block font-serif italic font-normal">
+              <WordReveal text="curious minds." delay={0.67} />
             </span>
           </h2>
 
@@ -57,6 +55,14 @@ export function WhatsNext() {
             designed to help different minds understand, communicate and work
             better together.
           </p>
+
+          <Cta
+            href="#join-us"
+            tone="on-light"
+            className="animate-fade-up mt-6 w-fit [animation-delay:1.2s] md:mt-8"
+          >
+            Join the Waitlist
+          </Cta>
         </div>
 
         <ul className="grid min-h-0 grid-cols-2 gap-4 sm:gap-6 lg:flex lg:h-full lg:flex-col lg:justify-between lg:gap-10">
@@ -66,7 +72,7 @@ export function WhatsNext() {
               className={`experience-card group ${card.motion}`}
               style={{ animationDelay: `${0.62 + index * 0.14}s` }}
             >
-              <div className="experience-photo relative h-[min(7.75rem,18vh)] w-full overflow-hidden md:h-[min(11.5rem,21vh)] lg:h-[min(13.5rem,25vh)]">
+              <div className="relative h-[min(7.75rem,18vh)] w-full overflow-hidden md:h-[min(11.5rem,21vh)] lg:h-[min(13.5rem,25vh)]">
                 <Image
                   src={card.image}
                   alt={card.alt}

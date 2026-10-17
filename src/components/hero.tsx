@@ -68,13 +68,13 @@ export function Hero() {
         </h1>
 
         <p className="animate-fade-up mt-8 max-w-[14rem] text-[14px] leading-6 text-white/90 [animation-delay:1.15s] md:mt-7 md:max-w-[24.5rem] md:text-[15px] md:leading-7 md:text-base">
-          Minds Seen is a digital learning platform that helps you understand
+          Minds Seen is a living neuroinclusive space that helps you understand
           how you think, communicate and connect—with tools to turn
           self-discovery into everyday insight.
         </p>
 
         <Cta
-          href="/waitlist"
+          href="#join-us"
           size="md"
           className="animate-fade-up mt-8 w-fit [animation-delay:1.3s] md:mt-8 md:gap-3 md:px-8 md:py-4 md:text-[16px]"
         >

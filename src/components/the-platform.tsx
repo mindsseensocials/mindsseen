@@ -8,16 +8,16 @@ import "./the-platform.css";
 
 const circles = [
   {
+    title: "Learn",
+    body: "The learning modules.",
+  },
+  {
     title: "Explore",
-    body: "Four learning experiences.",
+    body: "The blog called Signals.",
   },
   {
-    title: "Discover",
-    body: "Insights about yourself.",
-  },
-  {
-    title: "Build.",
-    body: "Your personal Minds Seen Profile.",
+    title: "Apply",
+    body: "Practical application of what you've learned.",
   },
 ] as const;
 
@@ -129,7 +129,7 @@ export function ThePlatform() {
           </PaintRule>
 
           <p className="eyebrow-reveal mt-8 text-[12px] tracking-[0.22em] md:mt-6">
-            THE PLATFORM
+            A LIVING NEUROINCLUSIVE SPACE
           </p>
 
           <h2 className="mt-5 max-w-[18ch] text-[clamp(2.1rem,4.6vw,3.85rem)] leading-[1.08] tracking-[-0.03em] md:mt-4 md:max-w-none">
@@ -146,9 +146,8 @@ export function ThePlatform() {
           </h2>
 
           <p className="animate-fade-up mt-6 max-w-[28rem] text-[15px] leading-7 text-white/90 [animation-delay:1.05s] md:mt-5 md:text-base">
-            Explore four self-paced learning experiences, build your personal
-            Minds Seen Profile, and gain practical tools to navigate your
-            thinking, energy, relationships and use of AI.
+            Every mind has its own patterns. Learn to notice yours. Discover
+            others. Find language for what usually goes unheard.
           </p>
 
           <ul className="mt-6 mb-0 flex flex-col items-center sm:mt-auto sm:mb-5 sm:flex-row sm:justify-center sm:pt-12 md:pt-16">

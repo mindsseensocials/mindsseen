@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useStory } from "@/components/story";
+import { SECTIONS } from "@/lib/sections";
 
 function ArrowIcon({ className }: { className: string }) {
   return (
@@ -37,6 +41,7 @@ type CtaProps = {
   arrow?: boolean;
   size?: keyof typeof sizes;
   tone?: "on-dark" | "on-light";
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
 export function Cta({
@@ -46,7 +51,13 @@ export function Cta({
   arrow = true,
   size = "md",
   tone = "on-dark",
+  onClick,
 }: CtaProps) {
+  const { goTo } = useStory();
+  const hash = href.startsWith("#") ? href.slice(1) : "";
+  const sectionIndex = hash
+    ? SECTIONS.findIndex((section) => section.id === hash)
+    : -1;
   const styles = sizes[size];
   const colors =
     tone === "on-light"
@@ -56,6 +67,14 @@ export function Cta({
   return (
     <Link
       href={href}
+      onClick={(event) => {
+        onClick?.(event);
+        if (event.defaultPrevented) return;
+        if (sectionIndex >= 0) {
+          event.preventDefault();
+          goTo(sectionIndex);
+        }
+      }}
       className={`group inline-flex items-center justify-center rounded-full leading-none transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] ${colors} ${styles.button} ${className}`}
     >
       <span>{children}</span>

@@ -9,14 +9,14 @@ import "./four-experiences.css";
 const cards = [
   {
     title: "Mind",
-    body: "Discover how you think, focus and process the world.",
+    body: "Discover how you think, focus, communicate and process the world.",
     image: "/images/MIND.png",
     alt: "A close-up of a person with their eyes closed",
     caption: "below",
   },
   {
     title: "Body",
-    body: "Understand your energy, senses and natural rhythms.",
+    body: "Understand your energy, senses and ways to work with your natural rhythms.",
     image: "/images/BODY.png",
     alt: "A silhouette pointing toward the horizon at dusk",
     caption: "above",
@@ -30,7 +30,7 @@ const cards = [
   },
   {
     title: "Intelligence",
-    body: "Explore AI tools that work with the way you think.",
+    body: "Explore AI tools to support the way you think and experience the world.",
     image: "/images/INTELLIGENCE.png",
     alt: "A person standing in cool blue light",
     caption: "above",
@@ -65,24 +65,30 @@ export function FourExperiences() {
             </PaintRule>
 
             <p className="eyebrow-reveal mt-5 text-[12px] tracking-[0.22em] md:mt-6">
-              THE FOUR EXPERIENCES
+              LEARN
             </p>
 
-            <h2 className="mt-3 max-w-[16ch] text-[clamp(1.85rem,3.6vw,3.15rem)] leading-[1.08] tracking-[-0.03em] md:mt-4">
+            <h2 className="mt-3 max-w-[22ch] text-[clamp(1.85rem,3.6vw,3.15rem)] leading-[1.08] tracking-[-0.03em] md:mt-4">
               <span className="block font-heading font-extralight">
-                <WordReveal text="Four ways to" delay={0.35} />
+                <WordReveal text="Activate the Minds Seen" delay={0.35} />
               </span>
               <span className="mt-1 block font-serif italic font-normal">
-                <WordReveal text="understand yourself." delay={0.59} />
+                <WordReveal text="experience." delay={0.67} />
               </span>
             </h2>
           </div>
 
-          <p className="animate-fade-up mt-5 max-w-[22rem] text-[14px] leading-6 text-neutral-800 [animation-delay:1.05s] md:mt-6 md:text-[15px] md:leading-7 min-[1440px]:mt-0 min-[1440px]:mb-1">
-            Each experience offers something to discover, something to question,
-            and something to carry into your everyday life. Together, they form
-            your Minds Seen Profile.
-          </p>
+          <div className="animate-fade-up mt-5 max-w-[22rem] text-[14px] leading-6 text-neutral-800 [animation-delay:1.05s] md:mt-6 md:text-[15px] md:leading-7 min-[1440px]:mt-0 min-[1440px]:mb-1">
+            <p>
+              Our first collection brings together four self-paced experiences,
+              rooted in neuroinclusion and cognitive science.
+            </p>
+            <p className="mt-4">
+              As you move through the four modules, you&apos;ll build your own
+              Minds Seen Profile—with practical tools to support how you work,
+              communicate and relate.
+            </p>
+          </div>
         </div>
 
         <ul className="mt-6 flex min-h-0 flex-1 flex-col content-start gap-3.5 sm:mt-12 md:mt-14 md:grid md:grid-cols-2 md:items-start md:gap-x-8 md:gap-y-8 lg:grid-cols-4 lg:gap-x-12 min-[1440px]:mt-8 min-[1440px]:content-center">

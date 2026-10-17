@@ -23,22 +23,25 @@ export function WhyItMatters() {
           </PaintRule>
 
           <p className="eyebrow-reveal mt-10 text-[12px] tracking-[0.22em] text-neutral-950">
-            WHY IT MATTERS
+            WHAT IS NEUROINCLUSION?
           </p>
 
           <h2 className="mt-5 text-[clamp(2.4rem,5vw,4.25rem)] leading-[1.05] tracking-[-0.03em]">
             <span className="block font-heading font-extralight">
-              <WordReveal text="There's no one" delay={0.35} />
+              <WordReveal text="Our minds experience" delay={0.35} />
             </span>
             <span className="mt-1 block font-serif italic font-normal">
-              <WordReveal text="way to think." delay={0.59} />
+              <WordReveal text="the world in different ways." delay={0.59} />
             </span>
           </h2>
 
           <p className="animate-fade-up mt-8 max-w-[22rem] text-[15px] leading-7 text-neutral-800 [animation-delay:1.05s] md:text-base">
-            We all experience the world differently. Neuroinclusion starts with
-            understanding those differences—and making room for every mind to
-            thrive.
+            Neuroinclusion starts with understanding those differences – and
+            making room for every mind to thrive.
+          </p>
+          <p className="animate-fade-up mt-4 max-w-[22rem] text-[15px] leading-7 text-neutral-800 [animation-delay:1.18s] md:text-base">
+            Minds Seen brings that understanding into everyday life, beginning
+            with the way we experience ourselves and others.
           </p>
         </div>
       </div>

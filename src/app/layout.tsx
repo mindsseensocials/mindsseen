@@ -26,7 +26,7 @@ const supplySans = localFont({
 export const metadata: Metadata = {
   title: "Minds Seen",
   description:
-    "A digital learning platform that helps you understand how you think, communicate and connect.",
+    "A living neuroinclusive space that helps you understand how you think, communicate and connect.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
