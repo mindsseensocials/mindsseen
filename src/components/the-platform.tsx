@@ -119,7 +119,7 @@ export function ThePlatform() {
           </div>
         </div>
 
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 pt-20 pb-6 text-center text-white sm:justify-start sm:pt-24 sm:pb-8 md:px-12 md:pt-16">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 pt-20 pb-5 text-center text-white sm:justify-start sm:pt-24 sm:pb-8 md:px-12 md:pt-16">
           <PaintRule phase={phase} delay={180}>
             <div className="flex w-[min(68rem,82vw)] items-center">
               <span className="h-px flex-1 bg-white/90" />
@@ -128,11 +128,11 @@ export function ThePlatform() {
             </div>
           </PaintRule>
 
-          <p className="eyebrow-reveal mt-8 text-[12px] tracking-[0.22em] md:mt-6">
+          <p className="eyebrow-reveal mt-5 text-[12px] tracking-[0.22em] md:mt-6">
             A LIVING NEUROINCLUSIVE SPACE
           </p>
 
-          <h2 className="mt-5 max-w-[18ch] text-[clamp(2.1rem,4.6vw,3.85rem)] leading-[1.08] tracking-[-0.03em] md:mt-4 md:max-w-none">
+          <h2 className="mt-3 max-w-[18ch] text-[clamp(1.65rem,7vw,1.9rem)] leading-[1.1] tracking-[-0.03em] md:mt-4 md:max-w-none md:text-[clamp(2.1rem,4.6vw,3.85rem)] md:leading-[1.08]">
             <span className="block font-heading font-extralight">
               <WordReveal
                 text="A guided learning experience to"
@@ -145,22 +145,22 @@ export function ThePlatform() {
             </span>
           </h2>
 
-          <p className="animate-fade-up mt-6 max-w-[28rem] text-[15px] leading-7 text-white/90 [animation-delay:1.05s] md:mt-5 md:text-base">
+          <p className="animate-fade-up mt-4 max-w-[28rem] text-[15px] leading-6 text-white/90 [animation-delay:1.05s] md:mt-5 md:leading-7 md:text-base">
             Every mind has its own patterns. Learn to notice yours. Discover
             others. Find language for what usually goes unheard.
           </p>
 
-          <ul className="mt-6 mb-0 flex flex-col items-center sm:mt-auto sm:mb-5 sm:flex-row sm:justify-center sm:pt-12 md:pt-16">
+          <ul className="mt-6 mb-0 flex flex-row items-center justify-center sm:mt-auto sm:mb-5 sm:pt-12 md:pt-16">
             {circles.map((circle, index) => (
               <li
                 key={circle.title}
-                className="circle-reveal z-0 -my-3 flex size-[8rem] flex-col items-center justify-center rounded-full border border-white/90 px-4 transition-colors duration-300 hover:z-10 hover:bg-white hover:text-neutral-950 sm:-mx-5 sm:my-0 sm:size-[13.5rem] sm:px-7 md:-mx-7 md:size-[15rem] md:px-8"
+                className="circle-reveal z-0 -mx-1 flex size-[clamp(5.6rem,28.5vw,7rem)] flex-col items-center justify-center rounded-full border border-white/90 px-2.5 transition-colors duration-300 hover:z-10 hover:bg-white hover:text-neutral-950 sm:-mx-5 sm:size-[13.5rem] sm:px-7 md:-mx-7 md:size-[15rem] md:px-8"
                 style={{ animationDelay: `${0.82 + index * 0.2}s` }}
               >
-                <p className="text-[11px] tracking-[0.18em] uppercase sm:text-[12px] sm:tracking-[0.2em]">
+                <p className="text-[10px] tracking-[0.16em] uppercase sm:text-[12px] sm:tracking-[0.2em]">
                   {circle.title}
                 </p>
-                <p className="mt-1.5 max-w-[7rem] text-[12px] leading-4 text-current/85 sm:mt-2 sm:max-w-[8.5rem] sm:text-[13px] sm:leading-5">
+                <p className="mt-1 max-w-[5.25rem] text-[11px] leading-3.5 text-current/85 sm:mt-2 sm:max-w-[8.5rem] sm:text-[13px] sm:leading-5">
                   {circle.body}
                 </p>
               </li>

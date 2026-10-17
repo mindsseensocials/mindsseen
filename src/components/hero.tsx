@@ -16,13 +16,13 @@ export function Hero() {
     <div className="relative h-full overflow-hidden bg-[#F6F3ED]">
       <div className="hero-mask absolute inset-0">
         <Image
-          src="/images/hero-mobile.webp"
+          src="/images/hero-mobile2.webp"
           quality={90}
           alt="A person with eyes closed, hair moving in the wind against a clear blue sky"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[48%_center] md:hidden"
+          className="object-cover object-[0%_center] md:hidden"
         />
         <Image
           src="/images/hero.webp"
@@ -69,7 +69,7 @@ export function Hero() {
           </span>
         </h1>
 
-        <p className="animate-fade-up mt-8 max-w-[14rem] text-[14px] leading-6 text-white/90 [animation-delay:1.15s] md:mt-7 md:max-w-[24.5rem] md:text-[15px] md:leading-7 md:text-base">
+        <p className="animate-fade-up mt-8 max-w-[12rem] text-[14px] leading-6 text-white/90 [animation-delay:1.15s] md:mt-7 md:max-w-[24.5rem] md:text-[15px] md:leading-7 md:text-base">
           Minds Seen is a living neuroinclusive space that helps you understand
           how you think, communicate and connect—with tools to turn
           self-discovery into everyday insight.

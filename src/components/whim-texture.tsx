@@ -40,7 +40,7 @@ export function WhimTexture({ phase }: { phase: SectionPhase }) {
 
   return (
     <div
-      className="whim-mask relative aspect-[495/506] w-[min(100%,18rem)] sm:w-[min(100%,24rem)] lg:w-[min(100%,34rem)]"
+      className="whim-mask relative aspect-[495/506] w-[min(100%,11rem)] sm:w-[min(100%,18rem)] lg:w-[min(100%,26rem)]"
       style={{
         WebkitMaskImage: "url(/images/WHIM-vector.svg)",
         maskImage: "url(/images/WHIM-vector.svg)",

@@ -9,8 +9,8 @@ export function WhyItMatters() {
   const phase = useSectionPhase("why-it-matters");
 
   return (
-    <div className="flex h-full items-center overflow-hidden bg-[#F6F3ED] px-5 pt-24 pb-10 text-neutral-950 md:px-10 lg:px-16">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20">
+    <div className="flex h-full items-center overflow-hidden bg-[#F6F3ED] px-5 pt-20 pb-5 text-neutral-950 md:px-10 md:pt-24 md:pb-10 lg:px-16">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-4 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20">
         <div className="flex justify-center lg:justify-start">
           <WhimTexture phase={phase} />
         </div>
@@ -22,11 +22,11 @@ export function WhyItMatters() {
             <span className="h-4 w-px bg-neutral-950" />
           </PaintRule>
 
-          <p className="eyebrow-reveal mt-10 text-[12px] tracking-[0.22em] text-neutral-950">
+          <p className="eyebrow-reveal mt-4 text-[12px] tracking-[0.22em] text-neutral-950 md:mt-10">
             WHAT IS NEUROINCLUSION?
           </p>
 
-          <h2 className="mt-5 text-[clamp(2.4rem,5vw,4.25rem)] leading-[1.05] tracking-[-0.03em]">
+          <h2 className="mt-3 text-[clamp(1.75rem,7.5vw,2rem)] leading-[1.08] tracking-[-0.03em] md:mt-5 md:text-[clamp(2.4rem,5vw,4.25rem)] md:leading-[1.05]">
             <span className="block font-heading font-extralight">
               <WordReveal text="Our minds experience" delay={0.35} />
             </span>
@@ -35,11 +35,11 @@ export function WhyItMatters() {
             </span>
           </h2>
 
-          <p className="animate-fade-up mt-8 max-w-[22rem] text-[15px] leading-7 text-neutral-800 [animation-delay:1.05s] md:text-base">
+          <p className="animate-fade-up mt-4 max-w-[22rem] text-[15px] leading-6 text-neutral-800 [animation-delay:1.05s] md:mt-8 md:leading-7 md:text-base">
             Neuroinclusion starts with understanding those differences – and
             making room for every mind to thrive.
           </p>
-          <p className="animate-fade-up mt-4 max-w-[22rem] text-[15px] leading-7 text-neutral-800 [animation-delay:1.18s] md:text-base">
+          <p className="animate-fade-up mt-2.5 max-w-[22rem] text-[15px] leading-6 text-neutral-800 [animation-delay:1.18s] md:mt-4 md:leading-7 md:text-base">
             Minds Seen brings that understanding into everyday life, beginning
             with the way we experience ourselves and others.
           </p>

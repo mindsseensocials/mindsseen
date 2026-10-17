@@ -15,7 +15,7 @@ export function JoinUs() {
       <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.9fr)] lg:items-start lg:gap-20 lg:pt-6">
           <div>
-            <h2 className="text-[clamp(2.25rem,4.6vw,3.85rem)] leading-[1.08] tracking-[-0.03em]">
+            <h2 className="text-[clamp(1.7rem,7.2vw,1.95rem)] leading-[1.1] tracking-[-0.03em] md:text-[clamp(2.25rem,4.6vw,3.85rem)] md:leading-[1.08]">
               <span className="block font-heading font-extralight">
                 <WordReveal text="Different minds." delay={0.35} />
               </span>
@@ -31,7 +31,7 @@ export function JoinUs() {
           </div>
 
           <div className="lg:pt-3">
-            <p className="font-heading text-[clamp(1.5rem,2.2vw,1.9rem)] font-extralight leading-none">
+            <p className="font-heading text-[1.25rem] font-extralight leading-none md:text-[clamp(1.5rem,2.2vw,1.9rem)]">
               <WordReveal text="Join us." delay={0.5} />
             </p>
 
