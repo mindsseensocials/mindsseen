@@ -11,14 +11,14 @@ const cards = [
   {
     title: "Signals",
     body: "Fresh perspectives, research and stories at the intersection of the mind, science and technology.",
-    image: "/images/UI/SIGNALS.png",
+    image: "/images/UI/SIGNALS.webp",
     alt: "Close-up of fine green fibers",
     motion: "card-up",
   },
   {
     title: "Future AI tools",
     body: "Exploring intelligent tools that adapt to different ways of thinking, communicating and working.",
-    image: "/images/UI/FUTUREAI.png",
+    image: "/images/UI/FUTUREAI.webp",
     alt: "Two golden droplets on a red surface",
     motion: "card-down",
   },
@@ -78,6 +78,7 @@ export function WhatsNext() {
                   alt={card.alt}
                   fill
                   sizes="(min-width: 1024px) 38vw, 45vw"
+                  quality={90}
                   className="object-cover"
                 />
               </div>

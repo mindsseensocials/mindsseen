@@ -108,13 +108,13 @@ export function ThePlatform() {
           <div
             ref={bgRef}
             className="platform-bg absolute inset-[-18%] bg-cover bg-center"
-            style={{ backgroundImage: "url(/images/guide.png)" }}
+            style={{ backgroundImage: "url(/images/guide.webp)" }}
           />
           <div ref={clipRef} className="platform-noblur-clip absolute inset-0">
             <div
               ref={noblurRef}
               className="platform-noblur absolute inset-[-18%] bg-cover bg-center"
-              style={{ backgroundImage: "url(/images/guide-noblur.png)" }}
+              style={{ backgroundImage: "url(/images/guide-noblur.webp)" }}
             />
           </div>
         </div>

@@ -10,28 +10,28 @@ const cards = [
   {
     title: "Mind",
     body: "Discover how you think, focus, communicate and process the world.",
-    image: "/images/MIND.png",
+    image: "/images/MIND.webp",
     alt: "A close-up of a person with their eyes closed",
     caption: "below",
   },
   {
     title: "Body",
     body: "Understand your energy, senses and ways to work with your natural rhythms.",
-    image: "/images/BODY.png",
+    image: "/images/BODY.webp",
     alt: "A silhouette pointing toward the horizon at dusk",
     caption: "above",
   },
   {
     title: "Together",
     body: "Connect and communicate across different minds.",
-    image: "/images/TOGETHER.png",
+    image: "/images/TOGETHER.webp",
     alt: "Two people holding hands in green light",
     caption: "below",
   },
   {
     title: "Intelligence",
     body: "Explore AI tools to support the way you think and experience the world.",
-    image: "/images/INTELLIGENCE.png",
+    image: "/images/INTELLIGENCE.webp",
     alt: "A person standing in cool blue light",
     caption: "above",
   },
@@ -108,6 +108,7 @@ export function FourExperiences() {
                     alt={card.alt}
                     fill
                     sizes="(min-width: 1440px) 22vw, (min-width: 1024px) 22vw, (min-width: 768px) 45vw, 30vw"
+                    quality={90}
                     className="object-cover"
                   />
                 </div>

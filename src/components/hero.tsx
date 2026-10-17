@@ -16,7 +16,8 @@ export function Hero() {
     <div className="relative h-full overflow-hidden bg-[#F6F3ED]">
       <div className="hero-mask absolute inset-0">
         <Image
-          src="/images/hero-mobile.jpg"
+          src="/images/hero-mobile.webp"
+          quality={90}
           alt="A person with eyes closed, hair moving in the wind against a clear blue sky"
           fill
           priority
@@ -24,7 +25,8 @@ export function Hero() {
           className="object-cover object-[48%_center] md:hidden"
         />
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero.webp"
+          quality={90}
           alt="A person with eyes closed, hair moving in the wind against a clear blue sky"
           fill
           priority

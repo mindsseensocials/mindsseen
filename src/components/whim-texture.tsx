@@ -50,7 +50,7 @@ export function WhimTexture({ phase }: { phase: SectionPhase }) {
         ref={layerRef}
         className="absolute inset-[-20%] bg-cover bg-center"
         style={{
-          backgroundImage: "url(/images/why-texture.jpg)",
+          backgroundImage: "url(/images/why-texture.webp)",
           transform: "scale(1.35)",
         }}
       />
