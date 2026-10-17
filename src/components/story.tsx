@@ -206,11 +206,12 @@ export function Story({
   return (
     <StoryContext.Provider value={value}>
       {header}
-      <div className="story-root relative h-svh overflow-hidden bg-[#F6F3ED]">
+      <main className="story-root relative h-svh overflow-hidden bg-[#F6F3ED]">
         {panels.map((panel, i) => (
           <section
             key={SECTIONS[i].id}
             id={SECTIONS[i].id}
+            aria-label={SECTIONS[i].label}
             ref={(node) => {
               panelRefs.current[i] = node;
             }}
@@ -226,7 +227,7 @@ export function Story({
             {panel}
           </section>
         ))}
-      </div>
+      </main>
     </StoryContext.Provider>
   );
 }
