@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { PaintRule } from "@/components/paint-rule";
 import { WordReveal } from "@/components/word-reveal";
 import { useSectionPhase, useStory } from "@/components/story";
 import { joinWaitlist, type JoinWaitlistState } from "@/lib/join-waitlist";
+import { validateWaitlistFields } from "@/lib/waitlist-fields";
 
 const initialState: JoinWaitlistState = { status: "idle", message: "" };
 
@@ -94,6 +95,7 @@ function Field({
   value,
   onChange,
   disabled,
+  invalid,
 }: {
   id: string;
   name: string;
@@ -103,26 +105,30 @@ function Field({
   value: string;
   onChange: (value: string) => void;
   disabled: boolean;
+  invalid: boolean;
 }) {
   return (
     <div className="min-w-0">
       <label
         htmlFor={id}
-        className="mb-1 block px-1 text-[12px] leading-none text-white/80 md:mb-1.5 md:text-[13px]"
+        className={`mb-1 block px-1 text-[12px] leading-none md:mb-1.5 md:text-[13px] ${invalid ? "text-white" : "text-white/80"}`}
       >
         {label}
       </label>
-      <div className="overflow-hidden rounded-full border border-white">
+      <div
+        className={`overflow-hidden rounded-full border border-white ${invalid ? "bg-white/10" : ""}`}
+      >
         <input
           id={id}
           name={name}
           type={type}
           required
+          aria-invalid={invalid || undefined}
           autoComplete={autoComplete}
           value={value}
           disabled={disabled}
           onChange={(event) => onChange(event.target.value)}
-          className="w-full rounded-full border-0 bg-transparent px-3.5 py-2.5 text-[13px] text-white shadow-none [outline:none] focus:[outline:none] focus-visible:[outline:none] disabled:opacity-60 md:px-6 md:py-3 md:text-[14px]"
+          className="w-full rounded-full border-0 bg-transparent px-3.5 py-2.5 text-base text-white shadow-none [outline:none] focus:[outline:none] focus-visible:[outline:none] disabled:opacity-60 md:px-6 md:py-3 pointer-fine:md:text-[14px]"
         />
       </div>
     </div>
@@ -139,22 +145,40 @@ export function JoinUs() {
   const [role, setRole] = useState("");
   const [consent, setConsent] = useState(false);
   const [noticeOpen, setNoticeOpen] = useState(false);
+  const [tried, setTried] = useState(false);
+  const [clientMessage, setClientMessage] = useState("");
+  const validation = validateWaitlistFields({ name, email, company, role });
+  const invalid = tried ? validation.invalid : { name: false, email: false, company: false, role: false };
 
   useEffect(() => {
     if (state.status === "success" || state.status === "error") {
+      setClientMessage("");
       setNoticeOpen(true);
     }
   }, [state]);
 
   function closeNotice() {
     setNoticeOpen(false);
+    setClientMessage("");
     if (state.status === "success") {
+      setTried(false);
       setName("");
       setEmail("");
       setCompany("");
       setRole("");
       setConsent(false);
     }
+  }
+
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    setTried(true);
+    if (!validation.message) {
+      setClientMessage("");
+      return;
+    }
+    event.preventDefault();
+    setClientMessage(validation.message);
+    setNoticeOpen(true);
   }
 
   return (
@@ -184,6 +208,8 @@ export function JoinUs() {
 
             <form
                 action={formAction}
+                noValidate
+                onSubmit={onSubmit}
                 className="animate-fade-up mt-4 flex w-full max-w-lg flex-col gap-2.5 [animation-delay:1.15s] md:mt-6 md:gap-3"
               >
                 <Field
@@ -194,6 +220,7 @@ export function JoinUs() {
                   label="Full name"
                   value={name}
                   disabled={pending}
+                  invalid={invalid.name}
                   onChange={setName}
                 />
                 <Field
@@ -204,6 +231,7 @@ export function JoinUs() {
                   label="Email address"
                   value={email}
                   disabled={pending}
+                  invalid={invalid.email}
                   onChange={setEmail}
                 />
                 <div className="grid grid-cols-2 gap-2 md:gap-3">
@@ -215,6 +243,7 @@ export function JoinUs() {
                     label="Company"
                     value={company}
                     disabled={pending}
+                    invalid={invalid.company}
                     onChange={setCompany}
                   />
                   <Field
@@ -225,6 +254,7 @@ export function JoinUs() {
                     label="Role"
                     value={role}
                     disabled={pending}
+                    invalid={invalid.role}
                     onChange={setRole}
                   />
                 </div>
@@ -237,11 +267,10 @@ export function JoinUs() {
                     id="join-consent"
                     name="consent"
                     type="checkbox"
-                    required
                     checked={consent}
                     disabled={pending}
                     onChange={(event) => setConsent(event.target.checked)}
-                    className="mt-0.5 size-4 shrink-0 accent-white [outline:none] focus:[outline:none] focus-visible:[outline:none]"
+                    className="mt-0.5 size-4 shrink-0 text-base accent-white [outline:none] focus:[outline:none] focus-visible:[outline:none]"
                   />
                   <span>
                     I agree to receive information when Minds Seen is live.
@@ -270,7 +299,9 @@ export function JoinUs() {
                   </svg>
                 </button>
               </form>
-            {noticeOpen && (state.status === "success" || state.status === "error") ? (
+            {noticeOpen && clientMessage ? (
+              <Notice status="error" message={clientMessage} onClose={closeNotice} />
+            ) : noticeOpen && (state.status === "success" || state.status === "error") ? (
               <Notice status={state.status} message={state.message} onClose={closeNotice} />
             ) : null}
           </div>

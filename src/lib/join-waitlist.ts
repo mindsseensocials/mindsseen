@@ -1,12 +1,11 @@
 "use server";
 
 import { Resend } from "resend";
+import { validateWaitlistFields } from "@/lib/waitlist-fields";
 
 const SEGMENT_ID =
   process.env.RESEND_SEGMENT_ID ?? "8ca69ac6-3f52-46df-b6f9-6854122a8ba5";
 const FROM = process.env.RESEND_FROM ?? "Minds Seen <hello@mindsseenlab.com>";
-const FIELD_LIMIT = 120;
-const EMAIL_LIMIT = 254;
 
 export type JoinWaitlistState = {
   status: "idle" | "success" | "error";
@@ -44,25 +43,10 @@ export async function joinWaitlist(
   const email = readText(formData, "email").toLowerCase();
   const company = readText(formData, "company");
   const role = readText(formData, "role");
-  const consent = formData.get("consent") === "on";
+  const fieldError = validateWaitlistFields({ name, email, company, role }).message;
 
-  if (!name || name.length > FIELD_LIMIT) {
-    return { status: "error", message: "Enter your full name." };
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > EMAIL_LIMIT) {
-    return { status: "error", message: "Enter a valid email address." };
-  }
-  if (!company || company.length > FIELD_LIMIT) {
-    return { status: "error", message: "Enter your company." };
-  }
-  if (!role || role.length > FIELD_LIMIT) {
-    return { status: "error", message: "Enter your role." };
-  }
-  if (!consent) {
-    return {
-      status: "error",
-      message: "Agree to receive information when Minds Seen is live.",
-    };
+  if (fieldError) {
+    return { status: "error", message: fieldError };
   }
 
   const apiKey = process.env.RESEND_API_KEY;

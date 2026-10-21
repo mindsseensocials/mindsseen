@@ -154,6 +154,16 @@ export function Story({
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT")
+      ) {
+        return;
+      }
       if (["ArrowDown", "PageDown", " "].includes(event.key)) {
         event.preventDefault();
         goBy(1);
