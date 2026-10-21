@@ -12,5 +12,12 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#F6F3ED",
     lang: "en",
     categories: ["education", "lifestyle"],
+    icons: [
+      {
+        src: "/apple-icon-light.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   };
 }
