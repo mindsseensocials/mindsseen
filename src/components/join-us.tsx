@@ -2,13 +2,88 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { PaintRule } from "@/components/paint-rule";
 import { WordReveal } from "@/components/word-reveal";
 import { useSectionPhase, useStory } from "@/components/story";
 import { joinWaitlist, type JoinWaitlistState } from "@/lib/join-waitlist";
 
 const initialState: JoinWaitlistState = { status: "idle", message: "" };
+
+function Notice({
+  status,
+  message,
+  onClose,
+}: {
+  status: "success" | "error";
+  message: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        onClose();
+        return;
+      }
+      if (["ArrowDown", "PageDown", "ArrowUp", "PageUp", " "].includes(event.key)) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+    window.addEventListener("keydown", onKeyDown, true);
+    window.addEventListener("wheel", onWheel, { capture: true, passive: false });
+    return () => {
+      window.removeEventListener("keydown", onKeyDown, true);
+      window.removeEventListener("wheel", onWheel, { capture: true });
+    };
+  }, [onClose]);
+
+  const title =
+    status === "success" ? message.split(". ")[0].replace(/\.$/, "") + "." : message;
+  const body =
+    status === "success" ? message.split(". ").slice(1).join(". ") : "";
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-80 flex items-center justify-center bg-black/55 px-5"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="waitlist-notice-title"
+        className="w-full max-w-md bg-[#F6F3ED] px-8 py-10 text-neutral-950 sm:px-10 sm:py-12"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <p
+          id="waitlist-notice-title"
+          className="font-heading text-[clamp(1.7rem,4vw,2.15rem)] leading-[1.1] font-extralight tracking-[-0.03em]"
+        >
+          {title}
+        </p>
+        {body ? (
+          <p className="mt-4 font-serif text-[1.35rem] leading-snug italic">{body}</p>
+        ) : null}
+        <button
+          type="button"
+          autoFocus
+          onClick={onClose}
+          className="mt-8 inline-flex items-center rounded-full bg-neutral-950 px-6 py-3 text-[13px] leading-none text-white transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
+        >
+          Close
+        </button>
+      </div>
+    </div>,
+    document.body,
+  );
+}
 
 function Field({
   id,
@@ -37,7 +112,7 @@ function Field({
       >
         {label}
       </label>
-      <div className="rounded-full border border-white">
+      <div className="overflow-hidden rounded-full border border-white">
         <input
           id={id}
           name={name}
@@ -47,7 +122,7 @@ function Field({
           value={value}
           disabled={disabled}
           onChange={(event) => onChange(event.target.value)}
-          className="w-full bg-transparent px-3.5 py-2.5 text-[13px] text-white outline-none disabled:opacity-60 md:px-6 md:py-3 md:text-[14px]"
+          className="w-full rounded-full border-0 bg-transparent px-3.5 py-2.5 text-[13px] text-white shadow-none [outline:none] focus:[outline:none] focus-visible:[outline:none] disabled:opacity-60 md:px-6 md:py-3 md:text-[14px]"
         />
       </div>
     </div>
@@ -63,6 +138,24 @@ export function JoinUs() {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [consent, setConsent] = useState(false);
+  const [noticeOpen, setNoticeOpen] = useState(false);
+
+  useEffect(() => {
+    if (state.status === "success" || state.status === "error") {
+      setNoticeOpen(true);
+    }
+  }, [state]);
+
+  function closeNotice() {
+    setNoticeOpen(false);
+    if (state.status === "success") {
+      setName("");
+      setEmail("");
+      setCompany("");
+      setRole("");
+      setConsent(false);
+    }
+  }
 
   return (
     <div className="flex h-full flex-col overflow-hidden bg-black px-5 pt-20 pb-5 text-white md:px-12 md:pt-24 md:pb-10 lg:px-20">
@@ -89,15 +182,7 @@ export function JoinUs() {
               <WordReveal text="Join us." delay={0.5} />
             </p>
 
-            {state.status === "success" ? (
-              <p
-                role="status"
-                className="animate-fade-up mt-5 max-w-lg text-[14px] leading-6 text-white/80 md:text-[15px] md:leading-7"
-              >
-                {state.message}
-              </p>
-            ) : (
-              <form
+            <form
                 action={formAction}
                 className="animate-fade-up mt-4 flex w-full max-w-lg flex-col gap-2.5 [animation-delay:1.15s] md:mt-6 md:gap-3"
               >
@@ -156,21 +241,12 @@ export function JoinUs() {
                     checked={consent}
                     disabled={pending}
                     onChange={(event) => setConsent(event.target.checked)}
-                    className="mt-0.5 size-4 shrink-0 accent-white"
+                    className="mt-0.5 size-4 shrink-0 accent-white [outline:none] focus:[outline:none] focus-visible:[outline:none]"
                   />
                   <span>
                     I agree to receive information when Minds Seen is live.
                   </span>
                 </label>
-
-                {state.status === "error" ? (
-                  <p
-                    role="alert"
-                    className="px-1 text-[12px] leading-5 text-white md:text-[13px]"
-                  >
-                    {state.message}
-                  </p>
-                ) : null}
 
                 <button
                   type="submit"
@@ -194,7 +270,9 @@ export function JoinUs() {
                   </svg>
                 </button>
               </form>
-            )}
+            {noticeOpen && (state.status === "success" || state.status === "error") ? (
+              <Notice status={state.status} message={state.message} onClose={closeNotice} />
+            ) : null}
           </div>
         </div>
 
